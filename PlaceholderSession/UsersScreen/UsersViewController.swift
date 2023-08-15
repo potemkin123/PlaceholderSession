@@ -1,22 +1,41 @@
 import UIKit
 
 final class UsersViewController: UITableViewController {
-    let userView = UsersPresenter()
-    @IBOutlet private weak var userScreenView: UITableView!
-    var models = [User]()
+    private var viewModel = UsersViewModel()
+    private var models = [User]()
+    private var post = [Post]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        userView.view = self
-        self.navigationItem.title = "Users"
+        self.navigationItem.title = "USERS".localized
         tableView.refreshControl = UIRefreshControl()
         tableView?.refreshControl?.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
         tableView.register(UINib(nibName: String(describing: UserTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: UserTableViewCell.self))
+        bindUserView()
         onRefresh()
+    }
+    
+    func bindUserView() {
+        viewModel.userResult = { [weak self] users in
+            DispatchQueue.main.async {
+                self?.models = users
+                self?.tableView.reloadData()
+            }
+        }
+        
+        viewModel.userIsLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.tableView.refreshControl?.beginRefreshing()
+                } else {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            }
+        }
     }
     
     @objc
     func onRefresh() {
-        userView.onRefresh()
+        viewModel.onRefresh()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,21 +50,18 @@ final class UsersViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserTableViewCell.identifier)) as! UserTableViewCell
         let user = models[indexPath.row]
         cell.setup(user: user)
-        return cell
-    }
-}
-
-extension UsersViewController: UserView {
-    func display(_ userResult: [User]) {
-        models = userResult
-        tableView.reloadData()
-    }
-    
-    func display(isLoading: Bool) {
-        if isLoading {
-            tableView.refreshControl?.beginRefreshing()
-        } else {
-            tableView.refreshControl?.endRefreshing()
+        cell.onPostsTap = { [weak self] in
+            guard let self else { return }
+            let controller = PostTableViewController()
+            controller.userId = user.id
+            self.navigationController?.pushViewController(controller, animated: true)
         }
+        cell.onAlbumTap = { [weak self] in
+            guard let self else { return }
+            let controller = AlbumTableViewController()
+            controller.userId = user.id
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        return cell
     }
 }

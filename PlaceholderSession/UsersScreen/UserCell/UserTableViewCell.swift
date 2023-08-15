@@ -1,8 +1,5 @@
 import UIKit
 
-protocol UserTableViewCellDelegate: AnyObject {
-}
-
 final class UserTableViewCell: UITableViewCell {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var nickNameLabel: UILabel!
@@ -17,20 +14,27 @@ final class UserTableViewCell: UITableViewCell {
     @IBOutlet private weak var websiteInfo: UILabel!
     @IBOutlet private weak var companyInfo: UILabel!
     @IBOutlet private weak var addressInfo: UILabel!
-    @IBOutlet weak var postsButton: UIButton!
-    @IBOutlet weak var photosButton: UIButton!
-    @IBOutlet weak var albumButton: UIButton!
-    public static var identifier: String {
-        get {
-            return String(describing: UserTableViewCell.self)        }
+    @IBOutlet private weak var postButton: UIButton!
+    @IBOutlet private weak var albumButton: UIButton!
+    var onPostsTap: (() -> Void)?
+    var onAlbumTap: (() -> Void)?
+    
+    static var identifier: String {
+            return String(describing: UserTableViewCell.self)
     }
-    public static func register() -> UINib {
+    
+    static func register() -> UINib {
         UINib(nibName: String(describing: UserTableViewCell.self), bundle: nil)
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    @IBAction func postButtonTap(_ sender: Any) {
+        onPostsTap?()
     }
+    
+    @IBAction func albumButtonTap(_ sender: Any) {
+        onAlbumTap?()
+    }
+    
     
     func setup(user: User) {
         let address = """
@@ -43,14 +47,13 @@ final class UserTableViewCell: UITableViewCell {
         websiteInfo.text = user.website
         companyInfo.text = user.company.name
         addressInfo.text = address
-        nickNameLabel.text = "Username"
-        emailLabel.text = "Email"
-        phoneLabel.text = "Phone"
-        websiteLabel.text = "Website"
-        companyLabel.text = "Company"
-        addressLabel.text = "Address"
-        postsButton.setTitle("Posts", for: .normal)
-        photosButton.setTitle("Photos", for: .normal)
-        albumButton.setTitle("Album", for: .normal)
+        nickNameLabel.text = "USERNAME".localized
+        emailLabel.text = "EMAIL".localized
+        phoneLabel.text = "PHONE".localized
+        websiteLabel.text = "WEBSITE".localized
+        companyLabel.text = "COMPANY".localized
+        addressLabel.text = "ADDRESS".localized
+        postButton.setTitle("POSTS".localized, for: .normal)
+        albumButton.setTitle("ALBUM".localized, for: .normal)
     }
 }

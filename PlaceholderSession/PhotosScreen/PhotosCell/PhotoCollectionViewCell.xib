@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotoCollectionViewCell" customModule="PlaceholderSession" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="328" height="245"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="328" height="245"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBR-St-Ze8">
+                        <rect key="frame" x="0.0" y="0.0" width="328" height="20.333333333333332"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ejd-22-icm">
+                        <rect key="frame" x="0.0" y="28.333333333333329" width="328" height="216.66666666666669"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="dBR-St-Ze8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="dUf-qK-9iJ"/>
+                <constraint firstAttribute="trailing" secondItem="ejd-22-icm" secondAttribute="trailing" id="hgZ-iQ-HVA"/>
+                <constraint firstItem="dBR-St-Ze8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jkc-nr-sXR"/>
+                <constraint firstAttribute="bottom" secondItem="ejd-22-icm" secondAttribute="bottom" id="kJV-yb-pHP"/>
+                <constraint firstItem="ejd-22-icm" firstAttribute="top" secondItem="dBR-St-Ze8" secondAttribute="bottom" constant="8" id="kp0-qv-Tr6"/>
+                <constraint firstAttribute="trailing" secondItem="dBR-St-Ze8" secondAttribute="trailing" id="lju-HH-iTs"/>
+                <constraint firstItem="ejd-22-icm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oqt-CO-GFa"/>
+            </constraints>
+            <size key="customSize" width="328" height="245"/>
+            <connections>
+                <outlet property="photoInAlbum" destination="ejd-22-icm" id="Fc1-q6-wye"/>
+                <outlet property="titlePhoto" destination="dBR-St-Ze8" id="aRD-jI-4h4"/>
+            </connections>
+            <point key="canvasLocation" x="-241.22137404580153" y="-41.197183098591552"/>
+        </collectionViewCell>
+    </objects>
+</document>
