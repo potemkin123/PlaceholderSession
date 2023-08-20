@@ -1,23 +1,25 @@
-//
-//  AlbumTableViewController.swift
-//  PlaceholderSession
-//
-//  Created by Владислав Юрченко on 06.08.2023.
-//
-
 import UIKit
 
 final class AlbumTableViewController: UITableViewController {
-    private var albumModel: AlbumViewModel!
+    private var albumModel: AlbumViewModelProtocol
     private var album: [Album] = []
-    var userId: Int?
+    
+    init(viewModel: AlbumViewModelProtocol) {
+        self.albumModel = viewModel
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "ALBUM".localized
-        guard let userId = userId else { return }
-        albumModel = AlbumViewModel(userId: userId)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 40.0
         tableView.reloadData()
         tableView.register(UINib(nibName: String(describing: AlbumTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: AlbumTableViewCell.self))
         albumModel.onRefresh() { [weak self] result in
@@ -40,11 +42,9 @@ final class AlbumTableViewController: UITableViewController {
         cell.setup(album: album)
         cell.onAlbumSelect = { [weak self] in
             guard let self else { return }
-            let controller = PhotosViewController()
-            controller.albumId = album.id
+            let controller = PhotosComposer.build(albumId: album.id)
             self.navigationController?.pushViewController(controller, animated: true)
         }
         return cell
     }
 }
-

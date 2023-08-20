@@ -7,10 +7,15 @@
 
 import Foundation
 
-final class PhotoViewModel {
+protocol PhotoViewModelProtocol {
+    var photoResult: (([Photo]) -> Void)? { get set }
+    var photoIsLoading: ((Bool) -> Void)? { get set }
+    func onRefresh(completion: @escaping (([Photo]) -> Void))
+}
+
+final class PhotoViewModel: PhotoViewModelProtocol {
     var photoResult: (([Photo]) -> Void)?
     var photoIsLoading: ((Bool) -> Void)?
-    
     private let albumId: Int
    
     

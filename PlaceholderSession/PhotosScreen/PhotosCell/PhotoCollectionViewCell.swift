@@ -17,9 +17,8 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     func setup(photo: Photo) {
         titlePhoto.text = photo.title
-        if let imageUrl = URL(string: photo.url) {
             DispatchQueue.global().async {
-                if let imageData = try? Data(contentsOf: imageUrl) {
+                if let imageData = try? Data(contentsOf: photo.url) {
                     DispatchQueue.main.async {
                         self.photoInAlbum.image = UIImage(data: imageData)
                     }
@@ -27,4 +26,3 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-}

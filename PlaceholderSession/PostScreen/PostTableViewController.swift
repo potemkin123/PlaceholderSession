@@ -1,13 +1,20 @@
 import UIKit
 
 final class PostTableViewController: UITableViewController {
-    private var postModel: PostsViewModel!
-    var userId: Int?
+    private var postModel: PostsViewModelProtocol
     private var posts: [Post] = []
+    
+    init(viewModel: PostsViewModelProtocol) {
+        self.postModel = viewModel
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let userId else { return }
-        postModel = PostsViewModel(userId: userId)
         title = "POSTS".localized
         tableView.dataSource = self
         tableView.delegate = self
@@ -35,11 +42,10 @@ final class PostTableViewController: UITableViewController {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
+        let cell = UITableViewCell()
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
         cell.layoutMargins = UIEdgeInsets.zero
-        
         return cell
     }
 }

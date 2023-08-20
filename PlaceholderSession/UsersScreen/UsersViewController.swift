@@ -1,9 +1,19 @@
 import UIKit
 
 final class UsersViewController: UITableViewController {
-    private var viewModel = UsersViewModel()
+    private var viewModel: UsersViewModelProtocol
     private var models = [User]()
     private var post = [Post]()
+    
+    init(viewModel: UsersViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "USERS".localized
@@ -52,14 +62,12 @@ final class UsersViewController: UITableViewController {
         cell.setup(user: user)
         cell.onPostsTap = { [weak self] in
             guard let self else { return }
-            let controller = PostTableViewController()
-            controller.userId = user.id
+            let controller = PostsComposer.build(userId: user.id)
             self.navigationController?.pushViewController(controller, animated: true)
         }
         cell.onAlbumTap = { [weak self] in
             guard let self else { return }
-            let controller = AlbumTableViewController()
-            controller.userId = user.id
+            let controller = AlbumComposer.build(userId: user.id)
             self.navigationController?.pushViewController(controller, animated: true)
         }
         return cell

@@ -1,21 +1,15 @@
-//
-//  AlbumTableViewCell.swift
-//  PlaceholderSession
-//
-//  Created by Владислав Юрченко on 06.08.2023.
-//
-
 import UIKit
 
 final class AlbumTableViewCell: UITableViewCell {
+    @IBOutlet private weak var albumTitle: UILabel!
     var onAlbumSelect: (() -> Void)?
     private var album: Album?
-    @IBOutlet private weak var albumTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectAlbum))
-            albumTitle.addGestureRecognizer(tapGestureRecognizer)
-            albumTitle.isUserInteractionEnabled = true
+        albumTitle.addGestureRecognizer(tapGestureRecognizer)
+        albumTitle.isUserInteractionEnabled = true
     }
     
     static var identifier: String {
