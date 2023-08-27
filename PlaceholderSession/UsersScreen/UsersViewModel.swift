@@ -17,7 +17,6 @@ final class UsersViewModel: UsersViewModelProtocol {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request) { data, response, error in
             guard let data = data else { return }
-            
             do {
                 let result = try JSONDecoder().decode([User].self, from: data)
                 

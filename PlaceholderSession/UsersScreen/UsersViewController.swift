@@ -1,9 +1,14 @@
 import UIKit
 
-final class UsersViewController: UITableViewController {
+final class UsersViewController: UITableViewController, UISearchResultsUpdating {
     private var viewModel: UsersViewModelProtocol
     private var models = [User]()
     private var post = [Post]()
+    private let searchController = UISearchController()
+    private var filteredUsers = [User]()
+    private var isFiltering: Bool {
+        return searchController.isActive
+    }
     
     init(viewModel: UsersViewModelProtocol) {
         self.viewModel = viewModel
@@ -20,6 +25,10 @@ final class UsersViewController: UITableViewController {
         tableView.refreshControl = UIRefreshControl()
         tableView?.refreshControl?.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
         tableView.register(UINib(nibName: String(describing: UserTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: UserTableViewCell.self))
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "FIND USER".localized
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.searchController = searchController
         bindUserView()
         onRefresh()
     }
@@ -53,12 +62,15 @@ final class UsersViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredUsers.count
+        }
         return models.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UserTableViewCell.identifier)) as! UserTableViewCell
-        let user = models[indexPath.row]
+        let user = isFiltering ? filteredUsers[indexPath.row] : models[indexPath.row]
         cell.setup(user: user)
         cell.onPostsTap = { [weak self] in
             guard let self else { return }
@@ -71,5 +83,16 @@ final class UsersViewController: UITableViewController {
             self.navigationController?.pushViewController(controller, animated: true)
         }
         return cell
+    }
+    
+    func filterContent(for searchText: String) {
+        filteredUsers = models.filter { $0.username.localizedCaseInsensitiveContains(searchText) }
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContent(for: searchText)
+            tableView.reloadData()
+        }
     }
 }
