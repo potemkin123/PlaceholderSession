@@ -1,6 +1,6 @@
 import UIKit
 
-final class PostTableViewController: UITableViewController {
+final class PostViewController: UITableViewController {
     private var postModel: PostsViewModelProtocol
     private var posts: [Post] = []
     

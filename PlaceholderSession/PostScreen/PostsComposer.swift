@@ -5,7 +5,7 @@ final class PostsComposer {
     
     static func build(userId: Int) -> UIViewController {
         let viewModel = PostsViewModel(userId: userId)
-        let controller = PostTableViewController(viewModel: viewModel)
+        let controller = PostViewController(viewModel: viewModel)
         return controller
     }
 }

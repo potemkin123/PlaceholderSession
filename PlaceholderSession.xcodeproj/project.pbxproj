@@ -24,7 +24,7 @@
 		1C58E01D2A8E287700E76E29 /* PhotosComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58E01C2A8E287700E76E29 /* PhotosComposer.swift */; };
 		1C58E01F2A8E2E7300E76E29 /* AlbumComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58E01E2A8E2E7300E76E29 /* AlbumComposer.swift */; };
 		1C58E0212A8E2FE300E76E29 /* PostsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58E0202A8E2FE300E76E29 /* PostsComposer.swift */; };
-		1CA467632A74583200DB6377 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA467612A74583200DB6377 /* PostTableViewController.swift */; };
+		1CA467632A74583200DB6377 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA467612A74583200DB6377 /* PostViewController.swift */; };
 		1CA467662A7502C000DB6377 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA467652A7502C000DB6377 /* PostsViewModel.swift */; };
 		1CA467682A7502CA00DB6377 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA467672A7502CA00DB6377 /* Post.swift */; };
 		1CA4676C2A75049400DB6377 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA4676A2A75049400DB6377 /* PostTableViewCell.swift */; };
@@ -59,7 +59,7 @@
 		1C58E01C2A8E287700E76E29 /* PhotosComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosComposer.swift; sourceTree = "<group>"; };
 		1C58E01E2A8E2E7300E76E29 /* AlbumComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumComposer.swift; sourceTree = "<group>"; };
 		1C58E0202A8E2FE300E76E29 /* PostsComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsComposer.swift; sourceTree = "<group>"; };
-		1CA467612A74583200DB6377 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
+		1CA467612A74583200DB6377 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		1CA467652A7502C000DB6377 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		1CA467672A7502CA00DB6377 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1CA4676A2A75049400DB6377 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		1CA467602A7457E900DB6377 /* PostScreen */ = {
 			isa = PBXGroup;
 			children = (
-				1CA467612A74583200DB6377 /* PostTableViewController.swift */,
+				1CA467612A74583200DB6377 /* PostViewController.swift */,
 				1CA467652A7502C000DB6377 /* PostsViewModel.swift */,
 				1CA467672A7502CA00DB6377 /* Post.swift */,
 				1CA467692A75046F00DB6377 /* PostCell */,
@@ -295,7 +295,7 @@
 				1CDE96AA2A6220D400EB048E /* User.swift in Sources */,
 				1CA467662A7502C000DB6377 /* PostsViewModel.swift in Sources */,
 				1C58E01F2A8E2E7300E76E29 /* AlbumComposer.swift in Sources */,
-				1CA467632A74583200DB6377 /* PostTableViewController.swift in Sources */,
+				1CA467632A74583200DB6377 /* PostViewController.swift in Sources */,
 				1C5109042A87F7BB008EBB53 /* PhotoCollectionViewCell.swift in Sources */,
 				1CA467682A7502CA00DB6377 /* Post.swift in Sources */,
 				1C5108EE2A802045008EBB53 /* PhotoViewModel.swift in Sources */,
